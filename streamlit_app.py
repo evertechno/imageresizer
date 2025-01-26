@@ -3,7 +3,7 @@ from PIL import Image
 import io
 import sys
 
-# Function to grab image from clipboard (works on Windows/macOS)
+# Check for platform and import ImageGrab accordingly
 if sys.platform == "win32" or sys.platform == "darwin":
     from PIL import ImageGrab
 
@@ -12,18 +12,21 @@ st.title("Custom Image Resizer")
 st.write("Upload an image, paste from clipboard, resize, and download the resized image.")
 
 # Option to paste image from clipboard
-if st.button('Paste from Clipboard'):
-    try:
-        # Grab image from clipboard
-        img = ImageGrab.grabclipboard()
+if sys.platform == "win32" or sys.platform == "darwin":
+    if st.button('Paste from Clipboard'):
+        try:
+            # Grab image from clipboard
+            img = ImageGrab.grabclipboard()
 
-        if img:
-            st.image(img, caption="Image from Clipboard", use_column_width=True)
-        else:
-            st.error("No image found in clipboard!")
+            if img:
+                st.image(img, caption="Image from Clipboard", use_column_width=True)
+            else:
+                st.error("No image found in clipboard!")
 
-    except Exception as e:
-        st.error(f"Error grabbing image from clipboard: {e}")
+        except Exception as e:
+            st.error(f"Error grabbing image from clipboard: {e}")
+else:
+    st.write("Clipboard paste is not supported on your operating system.")
 
 # File uploader widget
 uploaded_image = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
