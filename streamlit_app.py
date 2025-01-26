@@ -4,14 +4,14 @@ import io
 import sys
 
 # Check for platform and import ImageGrab accordingly
-if sys.platform == "win64" or sys.platform == "darwin":
+if sys.platform == "win32" or sys.platform == "darwin":
     from PIL import ImageGrab
 
 # Streamlit app configuration
 st.title("Custom Image Resizer")
 st.write("Upload an image, paste from clipboard, resize, and download the resized image.")
 
-# Option to paste image from clipboard
+# Option to paste image from clipboard (Windows/macOS only)
 if sys.platform == "win32" or sys.platform == "darwin":
     if st.button('Paste from Clipboard'):
         try:
@@ -26,9 +26,9 @@ if sys.platform == "win32" or sys.platform == "darwin":
         except Exception as e:
             st.error(f"Error grabbing image from clipboard: {e}")
 else:
-    st.write("Clipboard paste is not supported on your operating system.")
+    st.write("Clipboard paste is not supported on your operating system. Please upload an image.")
 
-# File uploader widget
+# File uploader widget (for all platforms)
 uploaded_image = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
 
 # If an image is uploaded or pasted from clipboard, process it
