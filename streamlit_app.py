@@ -4,7 +4,7 @@ import io
 import sys
 
 # Check for platform and import ImageGrab accordingly
-if sys.platform == "win32" or sys.platform == "darwin":
+if sys.platform == "win64" or sys.platform == "darwin":
     from PIL import ImageGrab
 
 # Streamlit app configuration
