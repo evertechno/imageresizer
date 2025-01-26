@@ -1,9 +1,10 @@
 import streamlit as st
 from PIL import Image
+import io
 
 # Streamlit app configuration
 st.title("Custom Image Resizer")
-st.write("Upload an image and specify the new size to resize the image.")
+st.write("Upload an image, specify the new size, and download the resized image.")
 
 # File uploader widget
 uploaded_image = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
@@ -26,10 +27,16 @@ if uploaded_image is not None:
         resized_image = img.resize((width, height))
         st.image(resized_image, caption=f"Resized Image: {width}x{height}", use_column_width=True)
 
-        # Save the resized image
-        save_button = st.sidebar.button("Save Resized Image")
-        if save_button:
-            # Save to a local file
-            resized_image_path = "resized_image.jpg"
-            resized_image.save(resized_image_path)
-            st.sidebar.write(f"Image saved at: {resized_image_path}")
+        # Prepare the resized image for download
+        # Save to a BytesIO object
+        buffered = io.BytesIO()
+        resized_image.save(buffered, format="PNG")
+        buffered.seek(0)
+
+        # Provide a download link for the resized image
+        st.sidebar.download_button(
+            label="Download Resized Image",
+            data=buffered,
+            file_name="resized_image.png",
+            mime="image/png"
+        )
