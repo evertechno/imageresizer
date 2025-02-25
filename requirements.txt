@@ -1,3 +1,7 @@
 streamlit
-pillow
-pyperclip
+Pillow
+numpy
+opencv-python
+matplotlib
+easyocr
+scikit-learn
