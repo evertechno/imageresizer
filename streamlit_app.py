@@ -372,9 +372,3 @@ if uploaded_image is not None or ('img' in locals() and img is not None):
         img_array[clone_position_y:clone_position_y + clone_height, clone_position_x:clone_position_x + clone_width] = clone
         cloned_image = Image.fromarray(img_array)
         st.image(cloned_image, caption="Cloned Image", use_column_width=True)
-
-    # Apply Image Masks
-    st.sidebar.header("Apply Mask")
-    if st.sidebar.button("Apply Mask"):
-        mask = np.zeros((img.height, img.width), np.uint8)
-        mask_position_x =
