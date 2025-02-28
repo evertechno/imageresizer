@@ -26,8 +26,8 @@ hide_streamlit_style = """
         .css-1tqja98 {visibility: hidden;} /* Hides the header bar */
     </style>
 """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # Option to paste image from clipboard (Windows/macOS only)
 if sys.platform == "win32" or sys.platform == "darwin":
     if st.button('Paste from Clipboard'):
