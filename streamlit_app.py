@@ -16,6 +16,18 @@ if sys.platform == "win32" or sys.platform == "darwin":
 st.title("Custom Image Resizer and Editor")
 st.write("Upload an image, paste from clipboard, resize, edit, and download the edited image.")
 
+# Add custom CSS to hide the header and the top-right buttons
+hide_streamlit_style = """
+    <style>
+        .css-1r6p8d1 {display: none;} /* Hides the Streamlit logo in the top left */
+        .css-1v3t3fg {display: none;} /* Hides the star button */
+        .css-1r6p8d1 .st-ae {display: none;} /* Hides the Streamlit logo */
+        header {visibility: hidden;} /* Hides the header */
+        .css-1tqja98 {visibility: hidden;} /* Hides the header bar */
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 # Option to paste image from clipboard (Windows/macOS only)
 if sys.platform == "win32" or sys.platform == "darwin":
     if st.button('Paste from Clipboard'):
